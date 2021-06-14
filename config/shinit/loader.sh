@@ -19,6 +19,7 @@ shinit_unload_functions() {
     unset -v SHINIT_PATH_BAK
 
     unset -v SHINIT_PLATFORM_NAME
+    unset -v SHINIT_PLATFORM_FEAT_GNU
 
     unset -f shinit_setvar
 
