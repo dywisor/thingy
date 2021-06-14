@@ -1,0 +1,14 @@
+ForwardAgent no
+IdentitiesOnly yes
+HashKnownHosts no
+AddKeysToAgent yes
+StrictHostKeyChecking accept-new
+GSSAPIAuthentication no
+UseRoaming no
+
+ServerAliveInterval 300
+ServerAliveCountMax 2
+TCPKeepAlive yes
+
+ForwardX11 no
+ForwardX11Trusted no
