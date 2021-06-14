@@ -1,5 +1,9 @@
 #!/bin/sh
 
+SHINIT_PLATFORM_NAME=''
+SHINIT_PLATFORM_FEAT_BSD='false'
+SHINIT_PLATFORM_FEAT_GNU='false'
+
 case "$(uname -s 2>/dev/null)" in
     (Linux)
         case "$(uname -r 2>/dev/null)" in
@@ -18,11 +22,6 @@ case "$(uname -s 2>/dev/null)" in
 
     (OpenBSD)
         SHINIT_PLATFORM_NAME='openbsd'
-        SHINIT_PLATFORM_FEAT_GNU='false'
-    ;;
-
-    (*)
-        SHINIT_PLATFORM_NAME=''
-        SHINIT_PLATFORM_FEAT_GNU='false'
+        SHINIT_PLATFORM_FEAT_BSD='true'
     ;;
 esac
