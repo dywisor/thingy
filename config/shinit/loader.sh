@@ -205,7 +205,6 @@ case "${-}" in
         if [ -d "${SHINIT_THINGS_BASEDIR}/config/shinit" ]; then
             shinit_want_fancy_ps1=
 
-            shinit_load_env 'aliases' || :
             shinit_load_env 'ienv' || :
 
             if [ -z "${shinit_want_fancy_ps1-}" ]; then
