@@ -1,3 +1,5 @@
 ControlPath ~/tmp/ssh/mux/%C
 ControlPersist 30m
-ControlMaster auto
+
+# feature not enabled here, as it cannot be disabled afterwards
+#ControlMaster auto
