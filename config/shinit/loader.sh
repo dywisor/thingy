@@ -211,12 +211,19 @@ case "${-}" in
             if [ -z "${shinit_want_fancy_ps1-}" ]; then
                 case "$(tty 2>/dev/null)" in
 
-                    (/dev/tty[A-Za-z]*)
-                        true
-                    ;;
-
                     (/dev/pts/?*|/dev/tty[0-9]*)
                         shinit_want_fancy_ps1=true
+                    ;;
+
+                    (/dev/ttyp[0-9]*)
+                        # OpenBSD (maybe other *BSD as well)
+                        if [ "${SHINIT_PLATFORM_FEAT_BSD:-false}" = 'true' ]; then
+                            shinit_want_fancy_ps1=true
+                        fi
+                    ;;
+
+                    (/dev/tty[A-Za-z]*)
+                        true
                     ;;
 
                     (/dev/console)
