@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if "${SHINIT_PLATFORM_FEAT_GNU:-false}"; then
+if [ "${SHINIT_PLATFORM_FEAT_GNU:-false}" = 'true' ]; then
     export LS_OPTIONS='-h --color'
 else
     export LS_OPTIONS='-h'
