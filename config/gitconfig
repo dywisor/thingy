@@ -32,8 +32,17 @@
     x = ls-remote
     new = checkout-b
     logs = log --stat
+    logp = log --patch
+    logg = log --graph
     sync = "! git pull --rebase && git push $@"
     ffs = commit --amend --no-edit
     fixup = commit --amend --no-edit
     commit-reset-date = '! LC_ALL=C GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date "$(date)"'
+    undo-commit = reset --soft HEAD^
+    undo = checkout -p --
     topdir = rev-parse --show-toplevel
+    sha-long = rev-parse HEAD
+
+[diff "sqlite3"]
+    textconv = echo .dump | sqlite3
+    binary = true
