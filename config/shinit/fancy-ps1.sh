@@ -114,7 +114,11 @@ __shinit_mkps1__() {
         }
 
         __printfail() {
-            __printrc \"\${2:-${PS1_COLOR_RED_LIGHT}}\" \"\${1-}\"
+            local color
+            color=\"\${2-}\"
+            [ -n \"\${color}\" ] || color=\"${PS1_COLOR_RED_LIGHT}\"
+
+            __printrc \"\${color}\" \"\${1-}\"
         }
 
         __retps() {
