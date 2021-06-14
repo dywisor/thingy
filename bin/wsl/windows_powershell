@@ -1,0 +1,12 @@
+#!/bin/sh
+DEFAULT_PROG='/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+
+if command -V powershell.exe 1>/dev/null 2>&1; then
+    exec powershell.exe "${@}"
+
+elif [ -x "${DEFAULT_PROG}" ]; then
+    exec "${DEFAULT_PROG}" "${@}"
+    
+else
+    return 127
+fi

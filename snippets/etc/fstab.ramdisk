@@ -1,0 +1,7 @@
+# shared ramdisk
+ram /ram tmpfs rw,mode=0755,relatime,nodev,noexec,nosuid,size=500m 0 0
+
+## or per-user tmpfs
+#ram /ram tmpfs rw,mode=0755,relatime,nodev,noexec,nosuid,size=10m 0 0
+#users /ram/users tmpfs rw,mode=0710,relatime,nodev,noexec,nosuid,uid=0,gid=100,size=10m 0 0
+#USER /ram/users/USER tmpfs rw,mode=0700,relatime,nodev,noexec,nosuid,uid=UID,gid=GID,size=SIZEm 0 0

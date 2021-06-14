@@ -1,0 +1,14 @@
+#!/bin/sh
+# Usage: check-files-not-same old new
+#
+# Returns 0 if old and new differ.
+#
+set -fu
+
+diff -q -- "${@}" 1>/dev/null && rc=0 || rc=${?}
+
+case "${rc}" in
+    (0) exit 1 ;;
+    (1) exit 0 ;;
+    (*) exit "${rc}" ;;
+esac

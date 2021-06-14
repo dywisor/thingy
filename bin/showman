@@ -1,0 +1,10 @@
+#!/bin/sh
+#  Usage: showman <manpage_file>...
+#
+#
+# DEP: groff
+#
+while [ ${#} -gt 0 ]; do
+   { groff -Tascii -man "${1:?}" | ${PAGER:-less}; } || exit
+   shift
+done

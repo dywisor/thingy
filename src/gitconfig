@@ -1,0 +1,10 @@
+[core]
+    editor = @@GIT_EDITOR@@
+
+[include]
+    path = @@SHINIT_THINGS_BASEDIR@@/config/gitconfig
+    path = @@SHINIT_THINGS_LOCALDIR@@/config/gitconfig
+
+## [user]
+##     name = Dev E. Loper
+##     email = developer@example.org

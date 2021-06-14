@@ -1,0 +1,3 @@
+#!/bin/sh
+# [[:space:]] works in BSD, too
+sed -r -e 's=[[:space:]][[:space:]]*$==' "${@}"

@@ -1,0 +1,5 @@
+#!/bin/sh
+tstamp="${1:?missing epoch timestamp}"
+shift
+
+exec date "${@}" -d "@${tstamp}"

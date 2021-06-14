@@ -1,0 +1,25 @@
+#!/bin/sh
+
+SHINIT_THINGS_BASEDIR='@@SHINIT_THINGS_BASEDIR@@'
+SHINIT_THINGS_LOCALDIR='@@SHINIT_THINGS_LOCALDIR@@'
+
+if [ -r "${SHINIT_THINGS_BASEDIR}/config/shinit/loader.sh" ]; then
+    . "${SHINIT_THINGS_BASEDIR}/config/shinit/loader.sh" || :
+fi
+
+# relocate bash history to ramdisk or /dev/null
+if [ -n "${SHINIT_USER_RAMDISK-}" ]; then
+    export HISTFILE="${SHINIT_USER_RAMDISK}/.bash_history"
+else
+    export HISTFILE='/dev/null'
+fi
+
+# disable ctrl-z
+trap "" 20
+
+# load local bashrc
+if [ -n "${HOME-}" ] && [ -r "${HOME}/.bashrc.local" ]; then
+    . "${HOME}/.bashrc.local" || :
+fi
+
+:

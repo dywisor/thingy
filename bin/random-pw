@@ -1,0 +1,32 @@
+#!/bin/sh
+# DEP_OPT: pwgen
+
+PW_ALPHA='a-zA-Z0-9_'
+DEFAULT_PW_LEN='64'
+
+case "${1-}" in
+    ('-c')
+        want_clipboard=y
+        shift
+    ;;
+    ('-1')
+        want_clipboard=
+        shift
+    ;;
+    (*)
+        want_clipboard="${DISPLAY-}"
+    ;;
+esac
+
+if command -V pwgen 1>/dev/null 2>&1; then
+    _gen() { pwgen -c -n "${1:-${DEFAULT_PW_LEN}}" 1 | tr -d '\n'; }
+else
+    _gen() { < /dev/urandom tr -dc "${PW_ALPHA}" | head -c "${1:-${DEFAULT_PW_LEN}}"; }
+fi
+
+if [ -n "${want_clipboard}" ]; then
+    _gen "${@}" | to_clipboard
+else
+    _gen "${@}"
+    printf '\n'
+fi

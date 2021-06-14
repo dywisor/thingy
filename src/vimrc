@@ -1,0 +1,17 @@
+""" dist files
+if filereadable("@@SHINIT_THINGS_BASEDIR@@/config/vim/vimrc.gentoo")
+    source @@SHINIT_THINGS_BASEDIR@@/config/vim/vimrc.gentoo
+endif
+
+if filereadable("@@SHINIT_THINGS_BASEDIR@@/config/vim/vimrc.local")
+    source @@SHINIT_THINGS_BASEDIR@@/config/vim/vimrc.local
+endif
+
+""" local files
+if filereadable("@@SHINIT_THINGS_LOCALDIR@@/config/vim/vimrc.gentoo")
+    source @@SHINIT_THINGS_LOCALDIR@@/config/vim/vimrc.gentoo
+endif
+
+if filereadable("@@SHINIT_THINGS_LOCALDIR@@/config/vim/vimrc.local")
+    source @@SHINIT_THINGS_LOCALDIR@@/config/vim/vimrc.local
+endif

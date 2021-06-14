@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# DEP: curl
+# DEP: git
+#
+set -fu
+
+fetch_msg() {
+   curl --silent --fail https://whatthecommit.com/index.txt
+}
+
+commit_msg="$(fetch_msg)" && [ -n "${commit_msg}" ] || exit 9
+
+exec git commit -m "${commit_msg}" "${@}"

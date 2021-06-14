@@ -1,0 +1,15 @@
+#!/bin/sh
+
+SHINIT_THINGS_BASEDIR='@@SHINIT_THINGS_BASEDIR@@'
+SHINIT_THINGS_LOCALDIR='@@SHINIT_THINGS_LOCALDIR@@'
+
+if [ -r "${SHINIT_THINGS_BASEDIR}/config/shinit/loader.sh" ]; then
+    . "${SHINIT_THINGS_BASEDIR}/config/shinit/loader.sh" || :
+fi
+
+# load local ashrc
+if [ -n "${HOME-}" ] && [ -r "${HOME}/.ashrc.local" ]; then
+    . "${HOME}/.ashrc.local" || :
+fi
+
+:

@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+#
+# DEP: python3
+# DEP: numpy
+
+from __future__ import absolute_import
+from __future__ import unicode_literals, division, generators
+from __future__ import print_function, nested_scopes, with_statement
+
+import errno
+import os
+import sys
+import numpy.random
+
+_OS_EX_OK = getattr(os, "EX_OK", 0)
+
+try:
+    BrokenPipeError
+except NameError:
+    class BrokenPipeError(Exception):
+        pass
+
+
+def gen_random_data_randint(block_size):
+    _numpy_randint = numpy.random.randint
+    while True:
+        yield _numpy_randint(0, 255, block_size).tobytes()
+
+def gen_random_data_bytes(block_size):
+    _numpy_randbytes = numpy.random.bytes
+    while True:
+        yield _numpy_randbytes(block_size)
+
+
+def main(prog, argv):
+    block_size = 2**16
+
+    stdout_unbuffered = os.fdopen(sys.stdout.fileno(), "wb", 0)
+    write_data = stdout_unbuffered.write
+    randgen = gen_random_data_bytes(block_size)
+
+    try:
+        while True:
+            write_data(next(randgen))
+
+    except BrokenPipeError:
+        return True
+
+    except (IOError, OSError) as err:
+        if err.errno == errno.EPIPE:
+            return True
+        raise
+
+# --- end of main (...) ---
+
+
+if __name__ == '__main__':
+    try:
+        excode = main(sys.argv[0], sys.argv[1:])
+    except KeyboardInterrupt:
+        excode = _OS_EX_OK ^ 130
+    else:
+        if excode is None or excode is True:
+            excode = _OS_EX_OK
+        elif excode is False:
+            excode = _OS_EX_OK ^ 1
+    # -- end try
+
+    sys.exit(excode)
+# --- end if __main__

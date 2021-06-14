@@ -1,0 +1,14 @@
+#!/bin/sh
+set_clipoard() {
+    windows_powershell Set-Clipboard -Value "${1}"
+}
+
+case "${1-}" in
+    (''|'-')
+        set_clipoard "$(cat)"
+    ;;
+
+    (*)
+        set_clipoard "${1}"
+    ;;
+esac
