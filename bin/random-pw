@@ -21,7 +21,7 @@ esac
 if command -V pwgen 1>/dev/null 2>&1; then
     _gen() { pwgen -c -n "${1:-${DEFAULT_PW_LEN}}" 1 | tr -d '\n'; }
 else
-    _gen() { < /dev/urandom tr -dc "${PW_ALPHA}" | head -c "${1:-${DEFAULT_PW_LEN}}"; }
+    _gen() { < /dev/urandom tr -dc "${PW_ALPHA}" | dd bs=1 count="${1:-${DEFAULT_PW_LEN}}" status=none; }
 fi
 
 if [ -n "${want_clipboard}" ]; then
