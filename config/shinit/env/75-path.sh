@@ -16,8 +16,8 @@ for __shinit_dir in \
         fi
 
         # platform-specific scripts
-        if [ -n "${SHINIT_PLATFORM-}" ]; then
-            shinit_PATH_addif "${__shinit_dir}/bin/${SHINIT_PLATFORM}"
+        if [ -n "${SHINIT_PLATFORM_NAME-}" ]; then
+            shinit_PATH_addif "${__shinit_dir}/bin/${SHINIT_PLATFORM_NAME}"
         fi
     fi
 done

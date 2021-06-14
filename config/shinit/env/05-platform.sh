@@ -5,20 +5,20 @@ case "$(uname -s 2>/dev/null)" in
         case "$(uname -r 2>/dev/null)" in
             (*[Mm]'icrosoft'*)
                 # may misdetect custom kernels with misguiding names
-                SHINIT_PLATFORM='wsl'
+                SHINIT_PLATFORM_NAME='wsl'
             ;;
 
             (*)
-                SHINIT_PLATFORM='linux'
+                SHINIT_PLATFORM_NAME='linux'
             ;;
         esac
     ;;
 
     (OpenBSD)
-        SHINIT_PLATFORM='openbsd'
+        SHINIT_PLATFORM_NAME='openbsd'
     ;;
 
     (*)
-        SHINIT_PLATFORM=''
+        SHINIT_PLATFORM_NAME=''
     ;;
 esac

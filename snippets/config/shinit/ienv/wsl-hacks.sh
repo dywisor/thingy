@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "${SHINIT_PLATFORM:-_}" = 'wsl' ]; then
+if [ "${SHINIT_PLATFORM_NAME:-_}" = 'wsl' ]; then
     # enable fancy PS1 in WSL environment
     shinit_want_fancy_ps1=true
 
