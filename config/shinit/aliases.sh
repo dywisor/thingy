@@ -1,6 +1,10 @@
 #!/bin/sh
 
-export LS_OPTIONS='-h --color'
+if "${SHINIT_PLATFORM_FEAT_GNU:-false}"; then
+    export LS_OPTIONS='-h --color'
+else
+    export LS_OPTIONS='-h'
+fi
 
 alias ls='ls ${LS_OPTIONS}'
 alias sl='ls ${LS_OPTIONS}'
