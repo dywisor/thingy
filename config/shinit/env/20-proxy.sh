@@ -15,7 +15,7 @@
 #set_default_proxy_env() { _set_proxy_env ...; }
 
 
-# @shbool proxy_knock_knock ( host, port )
+# @shbool proxy_knock_knock ( host, port, [timeout:=2] )
 #
 #   Returns true if host:port is reachable, else false.
 #
@@ -26,7 +26,7 @@
 #   @COMPAT: -z option may be problematic
 #
 proxy_knock_knock() {
-    nc -z -w 2 "${1:?}" "${2:?}" < /dev/null 1>/dev/null 2>&1
+    nc -z -w "${3:-2}" "${1:?}" "${2:?}" < /dev/null 1>/dev/null 2>&1
 }
 
 
