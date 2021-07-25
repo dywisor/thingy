@@ -30,6 +30,54 @@ proxy_knock_knock() {
 }
 
 
+# @shbool proxy_knock_knock_select ( timeout:=2, proxy..., **v0! )
+#
+#
+#   Accepts a series of proxy candidates (host:port pairs)
+#   and returns the first reachable one via %v0.
+#   The status code indicates whether at least one proxy was found.
+#
+#   All candidates will be checked in parallel,
+#   passing 1000s of hosts to this function at once is highly discouraged.
+#
+#   The %timeout parameter is mandatory, but may be empty.
+#
+#   Note: IPv6 addresses are not properly supported, but should work as long
+#         as the last colon-separated component is the destination port.
+#
+proxy_knock_knock_select() {
+    v0=
+
+    local timeout
+    local px
+    local wait_list
+    local job_id
+    local idx
+
+    [ $# -gt 0 ] || return 64
+    timeout="${1-}"
+
+    wait_list=
+    for px; do
+        proxy_knock_knock "${px%:*}" "${px##*:}" "${timeout}" &
+        wait_list="${wait_list:+${wait_list} }${!}"
+    done
+
+    px=
+    idx=0
+    for job_id in ${wait_list}; do
+        idx=$(( idx + 1 ))
+        if wait "${job_id}"; then
+            # EVAL (quoted)
+            [ -n "${px}" ] || eval "px=\"\${${idx}}\""
+        fi
+    done
+
+    v0="${px}"
+    [ -n "${v0}" ]
+}
+
+
 # void unset_proxy_env ( **<proxy_vars>! )
 #
 #  Unsets (and unexports) all proxy-related variables.
