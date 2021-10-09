@@ -1,0 +1,8 @@
+#!/bin/sh
+# generates a private key or psk for wireguard
+#
+# taken from OpenBSD ifconfig(8), section WIREGUARD
+#
+set -fu
+
+exec openssl rand -base64 32
