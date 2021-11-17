@@ -16,6 +16,9 @@ autocmd FileType Makefile setlocal noexpandtab
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" Toggle paste mode with F2
+set pastetoggle=<F2>
+
 " relocate temporary files to ramdisk if present
 if isdirectory(expand("/ram/users/$USER/vim"))
     set backupdir=/ram/users/$USER/vim
