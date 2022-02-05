@@ -14,12 +14,12 @@ if [ "${SHINIT_PLATFORM_NAME:-_}" = 'wsl' ]; then
     # instead of asking for a passphrase.
     # Well, thanks for that.
     # Explicitly setting the TTY helps.
-    if [ -z "${GPG_TTY-}" ]; then
-        if t0="$( tty 2>/dev/null )" && [ -n "${t0}" ]; then
-            export GPG_TTY="${t0}"
-        fi
-        unset -v t0
+    # This has to be done in every shell session,
+    # in order to account for pts created by e.g. tmux.
+    if t0="$( tty 2>/dev/null )" && [ -n "${t0}" ]; then
+        export GPG_TTY="${t0}"
     fi
+    unset -v t0
 
     # Reset working directory when currently below /mnt/
     #  (chdir to home rather than Windows' USERPROFILE;
